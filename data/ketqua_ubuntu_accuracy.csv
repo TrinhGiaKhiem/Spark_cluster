@@ -1,0 +1,6 @@
+Ten_file,Spark,Cluster
+data2K.csv,0.829,0.845
+data500k_10c.csv,0.828,0.833
+data1M_2c.csv,0.963,0.962
+data1M_10c.csv,0.840,0.841
+data2M_10c.csv,,0.841

@@ -1,0 +1,35 @@
+Acivity1
+ssh 20010776@103.143.206.51 -p 21122 
+cd big_data 
+mkdir day2 (tạo thư mục day2 trong thư mục big_data)
+coppy 2 file:
+	+ cp big_data/ml-100k/u.data day2/
+	+ cp big_data/ml-100k/u.item day2/
+Tạo các thư mục trong hệ thống HDFS
+	+ hadoop fs -mkdir /user/20010776/day1
+	+ hadoop fs -mkdir /user/20010776/day1/b 
+	+ hadoop fs -mkdir /user/20010776/day1/c 
+	+ hadoop fs -mkdir /user/20010776/day1/b/b1 
+	+ hadoop fs -mkdir /user/20010776/day1/b/b2
+	+ hadoop fs -mkdir /user/20010776/day1/b/b3
+	+ hadoop fs -mkdir /user/20010776/day1/b/b1/b11
+	+ hadoop fs -mkdir /user/20010776/day1/b/b1/b12
+	+ hadoop fs -mkdir /user/20010776/day1/c/c1
+	+ hadoop fs -mkdir /user/20010776/day1/c/cc
+
+Tạo thư mục day2 và input,output trong day2 trên HDFS
+	+ hadoop fs -mkdir /user/20010776/day2
+	+ hadoop fs -mkdir /user/20010776/day2/input
+	+ hadoop fs -mkdir /user/20010776/day2/output
+copy u.data và u.item lên thư mục input của hệ thống HDFS
+	+ hadoop fs -put u.data /user/20010776/day2/input
+	+ hadoop fs -put u.item /user/20010776/day2/input
+
+Activity 2
+1
+	(di chuyển đến thư mục day2)
+	+ vi RatingCount.java
+	+ viết code rồi lưu bằng lệnh :wq
+2
+
+	

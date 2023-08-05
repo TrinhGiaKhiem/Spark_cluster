@@ -1,0 +1,6 @@
+Ten_file,Chay_thuong,Spark
+data2K.csv,0.848,0.845
+data500k_10c.csv,0.928,0.836
+data1M_2c.csv,0.971,0.963
+data1M_10c.csv,0.939,0.837
+data2M_10c.csv,0.948,0.837

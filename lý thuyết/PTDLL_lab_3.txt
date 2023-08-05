@@ -1,0 +1,33 @@
+Activity 1
+tạo thư mục day3:
+	+ cd big_data
+	+ mkdir day3
+
+copy 3 file vào thư mục day 3
+	+ cp mk-100k/u.data day3/
+	+ cp mk-100k/u.item day3/
+	+ scp -P 21122 hadoop-core-1.2.1.jar 20010776@103.143.206.51:your_ID/big_data/day2
+
+
+tạo trên HDFS:
+	+ hadoop fs -mkdir /user/20010776/day3
+	+ hadoop fs -mkdir /user/20010776/day3/input
+	+ hadoop fs -mkdir /user/20010776/day3/output
+cophady lên HDFS
+	+ hadoop fs -pur u.data /user/20010776/day3/input
+	+ hadoop fs -pur u.item /user/20010776/day3/input
+
+Activity 2
+Chép code
+Biên dịch:
+	+ javac -classpath hadoop-core-1.2.1.jar -d . *.java
+Tạo file Manifest.txt trong thư mục day3:
+	+ cd day3
+	+ vi Manifest.txt
+Tạo biến môi trường:
+	+ export HADOOp_CLASSPATH="Average"
+Đóng gói chương trình:
+	+ jar cfm avgRating.jar Manifest.txt Average/*.class
+
+
+

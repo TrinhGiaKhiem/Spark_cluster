@@ -1,0 +1,70 @@
+Activity 1
+- đăng nhập:
+	+ ssh 20010776@103.143.206.51 -p 21122
+	+ 12345
+- tạo thư mục:
+	+ cd big_data 
+	+ mkdir day4
+- copy file:
+	+ cp ml-100k/u.data day4/
+	+ cp ml-100k/u.item day4/
+	+ cp ml-100k/u.user day4/
+- tạo thư mục day4 trên hdsf:
+	+ hadoop fs -mkdir user/20010776/day4
+	+ hadoop fs -mkdir user/20010776/day4/data
+-copy 3 file vào thư mục data trên hệ thống hdfs:
+	+ hadoop fs -pur u.data /user/20010776/day4/data
+	+ hadoop fs -pur u.item /user/20010776/day4/data
+	+ hadoop fs -pur u.user /user/20010776/day4/data
+
+Activity 2
+- Mở Grunt shell:
+	+ pig -x mapreduce
+- Load dữ liệu rating:
+	+ ratings = LOAD ‘/user/ho_va_ten/day4/data/u.data’ AS (userID:int, movieID:int, rating:int, ratingTime:int);
+- Xem dữ liệu:
+	+ DUMP ratings;
+- Load dữ liệu với thông tin của các movies:
+	+ movieInfo = LOAD ‘/user/ho_va_ten/day4/data/u.item’ USING PigStorage(‘|’) AS (movieID:int, movieTitle: chararray, releaseDate: chararray, videoRelease: chararray, imdbLink: chararray);
+- Sử dụng lệnh DUMP, DESCRIBE, và ILLUSTRATE để xem các bảng dữ liệu vừa được tạo ra:
+	+ DUMP movieinfo
+	+ DESCRIBE movieinfo
+- Nhóm dữ liệu rating theo ID:
+	+ movieByID = GROUP ratings BY movieID;
+- Tính điểm đánh giá trung bình của các movie:
+	+ avgRatings = FOREACH movieByID GENERATE group as movieID, AVG(ratings.rating) AS avgRating;
+- Sử dụng lệnh DUMP, DESCRIBE, và ILLUSTRATE để xem các bảng dữ liệu "movieByID " và "avgRatings".
+	+ DUMP movieByID
+	+ DESCRIBE movieByID
+	+ DUMP avgRatings
+	+ DESCRIBE avgRatingsvi 
+- Kết hợp bảng "avgRatings" và bảng "movieInfo":
+	+ avgRatingsWithTitle = JOIN movieInfo BY movieID, avgRatings BY movieID;
+- Sử dụng lệnh DUMP, DESCRIBE, và ILLUSTRATE để xem các bảng dữ liệu " avgRatingsWithTitle"
+	+ DUMP avgRatingsWithTitle
+	+ DESCRIBE avgRatingsWithTitle
+- Lưu dữ liệu của bảng “avgRatingsWithTitle” vào “/user/ho_va_ten/day4/avgRatings1” trên hệ thống HDFS: STORE avgRatingsWithTitle INTO ‘/user/ho_va_ten/day4/avgRatings1’ USING PigStorage(‘,’);
+	+ STORE avgRatingsWithTitle INTO ‘user/20010776/day4/avgRatings1’ USING PigStorage(‘,’);
+- Copy file "avgRatings1/part-r-00000" về thư mục day4 trên hệ thống Sandbox-hdp
+	+ hadoop fs -put user/20010776/day4/avgRatings1/part-r-00000 /day4
+
+Activity 3
+- Tạo một Pig script có tên là "script.pig":
+	+ vi script.pig
+	+ chép bảng vào
+- chạy file pig:
+	+ pig -x mapreduce script.pig 
+- copy file về sanbox:
+	+ cd day4
+	+ mkdir activity_3 	
+	+ hadoop fs -copyToLocal user/20010776/day4/avgRatings1_2 activity_3 
+
+Activity 4
+- tạo thư mục activity4 trong day4:
+	+ cd day4
+	+ mkdir activity4
+- tạo file script rồi viết nội dung:
+	+ vi script.pig
+- chạy:
+	+ pig-xmapreduce script.pig
+- 

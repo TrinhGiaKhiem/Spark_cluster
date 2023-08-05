@@ -1,0 +1,11 @@
+create table nhanvien (ID int, name varchar(64), tuoi int, luong int);
+
+insert into nhanvien values(1,'lam',41,50000000),(2,'hai',21,5000000),(3,'nghia',31,15000000),(4,'nga',25,5000000),(5,'hoa',28,12000000);
+
+alter table nhanvien add column diachi varchar(64);
+
+update nhanvien set diachi = 'hanoi' where ID = 1;
+update nhanvien set diachi = 'haiphong' where ID = 2;
+update nhanvien set diachi = 'quangnam' where ID = 3;
+update nhanvien set diachi = 'hoian' where ID = 4;
+update nhanvien set diachi = 'binhduong' where ID = 5;
